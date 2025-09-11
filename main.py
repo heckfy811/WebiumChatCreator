@@ -1,6 +1,6 @@
 import asyncio
 
-from routers import start, group_create
+from routers import start, names_generate
 from aiogram import Bot, Dispatcher
 
 from db import db
@@ -9,7 +9,7 @@ import config
 
 async def main():
     #Инициализация бота
-    bot = Bot(token=config.BOT_TOKEN)
+    bot = Bot(token=config.BOT_TOKEN) #TODO: .env
     dp = Dispatcher()
 
     #подключение базы
@@ -17,7 +17,7 @@ async def main():
 
     #Подключение роутеров
     dp.include_router(start.router)
-    dp.include_router(group_create.router)
+    dp.include_router(names_generate.router)
 
     await dp.start_polling(bot)
 
