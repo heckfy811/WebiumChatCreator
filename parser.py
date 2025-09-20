@@ -2,19 +2,6 @@ import requests
 
 import config
 
-#TODO: довести до ума подтягивание токена
-def get_access_token(refresh_token):
-    token_url = "https://api.carrotquest.app/v3/auth/jwt/refresh"
-    token_data = requests.post(
-        token_url,
-        json={"auth_token" : refresh_token}
-    )
-    if token_data.status_code == 200:
-        access_token = token_data.json()["data"]["access"]
-    else:
-        print("Ошибка:", token_data.status_code, token_data.text)
-        return
-    return access_token
 
 def get_students(course):
     headers = {
@@ -24,8 +11,6 @@ def get_students(course):
 
     for i in range(1, 4):
         students_url = f"https://lms-admin.webium.ru/api/v2/staff/courses/{course}/students/?page={i}&page_size=15"
-
-        #TODO: .env для всех ссылок
 
         students_data = requests.get(students_url, headers=headers)
 
@@ -40,7 +25,7 @@ def get_students(course):
 
 def get_course_name(course):
     headers = {
-        "authorization": config.JWT,
+        "Authorization": config.JWT,
     }
     course_url = f"https://lms-admin.webium.ru/api/v2/staff/courses/{course}/"
     course_data = requests.get(course_url, headers=headers)

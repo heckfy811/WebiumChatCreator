@@ -25,11 +25,11 @@ async def start_handler(message: Message, state: FSMContext) -> None:
 @router.message(Mentor.mentor_name)
 async def set_mentor_name(message: Message, state: FSMContext):
     await state.update_data(mentor_name=message.text)
-    await message.answer(text="Введи свой refresh-токен")
+    await message.answer(text="Введи свой JWT-токен")
     await state.set_state(Mentor.refresh_token)
 
 @router.message(Mentor.refresh_token)
-async def set_mentor_name(message: Message, state: FSMContext):
+async def set_mentor_token(message: Message, state: FSMContext):
     await state.update_data(refresh_token=message.text)
     data = await state.get_data()
     db.save_mentor(message.from_user.id, data["mentor_name"] ,message.text)

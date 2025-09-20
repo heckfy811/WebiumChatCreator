@@ -1,0 +1,5 @@
+psycopg2~=2.9.10
+config~=0.5.1
+aiogram~=3.22.0
+requests~=2.32.5
+dotenv~=0.9.9

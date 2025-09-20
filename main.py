@@ -9,7 +9,7 @@ import config
 
 async def main():
     #Инициализация бота
-    bot = Bot(token=config.BOT_TOKEN) #TODO: .env
+    bot = Bot(token=config.BOT_TOKEN)
     dp = Dispatcher()
 
     #подключение базы
