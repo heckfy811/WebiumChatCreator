@@ -2,7 +2,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 
-import parser
+from parsers import get_students, get_course
 from states.states import Course
 from db import db
 from keyboards import kb
@@ -21,8 +21,8 @@ async def give_names(message: Message, state: FSMContext):
     #TODO: убрать эту ебанину с цифрами
     mentor_name = mentor[2]
     try:
-        students = parser.get_students(data["course_id"])
-        course_name = parser.get_course_name(data["course_id"])
+        students = get_students.get_students(data["course_id"])
+        course_name = get_course.get_course_name(data["course_id"])
     except TypeError:
         await message.answer(text="Курс не существует или у Вас недостаточно прав.")
         return

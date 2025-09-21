@@ -2,7 +2,7 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 
-import parser
+from parsers import get_students, get_course
 from states.states import Student
 from db import db
 from keyboards import kb
@@ -24,12 +24,12 @@ async def generate_name(message: Message, state: FSMContext):
     await state.update_data(student_id=message.text)
     data = await state.get_data()
     try:
-        course_name = parser.get_course_name(data["course_id"])
+        course_name = get_course.get_course_name(data["course_id"])
     except TypeError:
         await message.answer(text="Курс не существует или у Вас недостаточно прав.")
         return
     try:
-        student_name = parser.get_student_by_id(data["course_id"], data["student_id"])
+        student_name = get_students.get_student_by_id(data["course_id"], data["student_id"])
     except TypeError:
         await message.answer(text="Ученик не существует или у Вас недостаточно прав.")
         return

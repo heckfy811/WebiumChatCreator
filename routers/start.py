@@ -32,6 +32,7 @@ async def set_mentor_name(message: Message, state: FSMContext):
 async def set_mentor_token(message: Message, state: FSMContext):
     await state.update_data(refresh_token=message.text)
     data = await state.get_data()
+    print(data)
     db.save_mentor(message.from_user.id, data["mentor_name"] ,message.text)
     await message.answer(f"Спасибо, {data["mentor_name"]}! Теперь я все запомнил ✨")
     await state.clear()

@@ -2,7 +2,6 @@ import requests
 
 import config
 
-
 def get_students(course):
     headers = {
         "authorization": config.JWT,
@@ -22,19 +21,6 @@ def get_students(course):
             print("Ошибка:", students_data.status_code, students_data.text)
             return
     return students
-
-def get_course_name(course):
-    headers = {
-        "Authorization": config.JWT,
-    }
-    course_url = f"https://lms-admin.webium.ru/api/v2/staff/courses/{course}/"
-    course_data = requests.get(course_url, headers=headers)
-    if course_data.status_code == 200:
-        course_name = course_data.json()["name"]
-    else:
-        print("Ошибка:", course_data.status_code, course_data.text)
-        return
-    return course_name
 
 def get_student_by_id(course, student):
     headers = {
