@@ -1,10 +1,8 @@
 import requests
 
-import config
-
-def get_students(course):
+def get_students(course, token):
     headers = {
-        "authorization": config.JWT,
+        "authorization": f"Bearer {token}",
     }
     students = []
 
@@ -22,9 +20,9 @@ def get_students(course):
             return
     return students
 
-def get_student_by_id(course, student):
+def get_student_by_id(course, student, token):
     headers = {
-        "authorization": config.JWT,
+        "authorization": f"Bearer {token}",
     }
     student_url = f"https://lms-admin.webium.ru/api/v2/staff/courses/{course}/students/{student}"
 

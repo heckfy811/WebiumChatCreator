@@ -1,15 +1,17 @@
 import asyncio
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from routers import start, names_generate, one_name, edit_token
 from aiogram import Bot, Dispatcher
 
 from db import db
 
-import config
-
 async def main():
     #Инициализация бота
-    bot = Bot(token=config.BOT_TOKEN)
+    bot = Bot(token=os.getenv("BOT_TOKEN"))
     dp = Dispatcher()
 
     #подключение базы

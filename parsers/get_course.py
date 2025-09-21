@@ -1,10 +1,8 @@
-import config
-
 import requests
 
-def get_course_name(course):
+def get_course_name(course, token):
     headers = {
-        "Authorization": config.JWT,
+        "Authorization": f"Bearer {token}",
     }
     course_url = f"https://lms-admin.webium.ru/api/v2/staff/courses/{course}/"
     course_data = requests.get(course_url, headers=headers)

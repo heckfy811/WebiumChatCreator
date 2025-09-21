@@ -39,7 +39,6 @@ def save_mentor(tg_id: int, mentor_name: str, refresh_token: str):
     cur.close()
     conn.close()
 
-
 def get_mentor(tg_id: int):
     conn = get_connection()
     cur = conn.cursor()

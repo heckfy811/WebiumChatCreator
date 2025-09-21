@@ -20,9 +20,10 @@ async def give_names(message: Message, state: FSMContext):
     mentor = db.get_mentor(message.from_user.id)
     #TODO: убрать эту ебанину с цифрами
     mentor_name = mentor[2]
+    token = mentor[3]
     try:
-        students = get_students.get_students(data["course_id"])
-        course_name = get_course.get_course_name(data["course_id"])
+        students = get_students.get_students(data["course_id"], token)
+        course_name = get_course.get_course_name(data["course_id"], token)
     except TypeError:
         await message.answer(text="Курс не существует или у Вас недостаточно прав.")
         return
