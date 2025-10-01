@@ -6,7 +6,7 @@ def get_connection():
         dbname=os.getenv("POSTGRES_DB"),
         user=os.getenv("POSTGRES_USER"),
         password=os.getenv("POSTGRES_PASSWORD"),
-        host="localhost",
+        host="db",
         port=5432
     )
 

@@ -1,4 +1,4 @@
-from aiogram.types import Message
+from aiogram.types import Message, FSInputFile, InputMediaPhoto
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 
@@ -10,13 +10,20 @@ from keyboards import kb
 router = Router()
 @router.message(F.text == "Сгенерить одно название")
 async def set_course(message: Message, state: FSMContext):
-    await message.answer(text="Введите ID курса:")
+    image = FSInputFile("static/course_id.png")
+    await message.answer_photo(image, caption="Введите ID курса (зайди на курс в админке и скопируй циферки там):")
     await state.set_state(Student.course_id)
 
 @router.message(Student.course_id)
 async def set_student(message: Message, state: FSMContext):
+    image_1 = InputMediaPhoto(type='photo', media=FSInputFile("static/student_id_1.png"), caption="Введите ID студента:\n"
+                              "1. Уменьши страницу с курсом по горизонтали, чтобы она приобрела подобный вид\n"
+                              "2. Зайди на нужного ученика\n"
+                              "3. Скопируй ID из ссылки")
+    image_2 = InputMediaPhoto(type='photo', media=FSInputFile("static/student_id_2.png"))
+    media = [image_1, image_2]
     await state.update_data(course_id=message.text)
-    await message.answer(text="Введите ID студента:")
+    await message.answer_media_group(media=media)
     await state.set_state(Student.student_id)
 
 @router.message(Student.student_id)

@@ -1,4 +1,4 @@
-from aiogram.types import Message
+from aiogram.types import Message, FSInputFile
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F
 
@@ -10,7 +10,8 @@ from keyboards import kb
 router = Router()
 @router.message(F.text == "Сгенерить все названия")
 async def set_course(message: Message, state: FSMContext):
-    await message.answer(text="Введите ID курса:")
+    image = FSInputFile("static/course_id.png")
+    await message.answer_photo(image, caption="Введите ID курса (зайди на курс в админке и скопируй циферки там):")
     await state.set_state(Course.course_id)
 
 @router.message(Course.course_id)
