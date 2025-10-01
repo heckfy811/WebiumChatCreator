@@ -19,7 +19,7 @@ async def start_handler(message: Message, state: FSMContext) -> None:
         await message.answer(text=f"С возвращением, {mentor[2]}! 🚀")
         await message.answer("Выберите действие:", reply_markup=kb.start_kb)
     else:
-        await message.answer(text="Привет! Введи своё имя (как будет в названиях групп):")
+        await message.answer(text="Привет! Я - бот для создания названий для бесед с учениками\n\nВведи своё имя (как будет в названиях групп):")
         await state.set_state(Mentor.mentor_name)
 
 @router.message(Mentor.mentor_name)

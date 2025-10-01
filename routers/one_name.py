@@ -44,4 +44,5 @@ async def generate_name(message: Message, state: FSMContext):
         await message.answer(text="Ученик не существует или у Вас недостаточно прав.")
         return
     await message.answer(text=f"{tutor_name} — {student_name}. {course_name}.")
+    await state.clear()
     await message.answer("Выберите действие:", reply_markup=kb.start_kb)

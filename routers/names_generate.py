@@ -31,4 +31,5 @@ async def give_names(message: Message, state: FSMContext):
     await message.answer(text="да начнется щитпост")
     for i in range(len(students)):
         await message.answer(text=f"{mentor_name} — {students[i]}. {course_name}.")
+    await state.clear()
     await message.answer("Выберите действие:", reply_markup=kb.start_kb)
